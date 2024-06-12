@@ -19,6 +19,21 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>ectimel</groupId>
+            <artifactId>module_a</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ectimel</groupId>
+            <artifactId>module_b</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ectimel</groupId>
+            <artifactId>module_shared</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
     </dependencies>
 
