@@ -1,5 +1,6 @@
 package example;
 
+import example.event.CustomEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

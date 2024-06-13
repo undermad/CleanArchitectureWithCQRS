@@ -1,11 +1,10 @@
-package example;
+package example.event;
 
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
 
 
 @Getter
-public class CustomEvent extends ApplicationEvent {
+public class CustomEvent extends Event {
     
     private String message;
     
@@ -13,5 +12,7 @@ public class CustomEvent extends ApplicationEvent {
         super(source);
         this.message = message;
     }
+    
+    
     
 }

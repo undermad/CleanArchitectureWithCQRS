@@ -1,5 +1,6 @@
 package example;
 
+import example.event.CustomEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
