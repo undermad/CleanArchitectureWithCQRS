@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>module_b</artifactId>
+    <artifactId>domain</artifactId>
 
     <name>module_b</name>
 

@@ -1,6 +1,7 @@
 package example;
 
-import example.event.CustomEvent;
+import example.event.CustomEventaa;
+import example.value_objects.PackingListName;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,12 @@ public class TestB {
     
     
     public void performMessage(){
-        CustomEvent customEvent = new CustomEvent(this, "Message from custom event creator!");
+        CustomEventaa customEvent = new CustomEventaa(this, "Message from custom event creator!");
         eventPublisher.publishEvent(customEvent);
     }
-    
+
+    public static void main(String[] args) {
+        PackingListName packingListName = new PackingListName("Abc");
+        System.out.println(packingListName.toString());
+    }
 }

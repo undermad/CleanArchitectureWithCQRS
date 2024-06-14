@@ -24,7 +24,7 @@
     <modules>
         <module>startup</module>
         <module>module_a</module>
-        <module>module_b</module>
+        <module>domain</module>
         <module>module_shared</module>
     </modules>
     

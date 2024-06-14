@@ -5,13 +5,13 @@ import org.springframework.context.ApplicationEvent;
 import java.util.Date;
 import java.util.UUID;
 
-public abstract class Event extends ApplicationEvent {
+public abstract class Eventaa extends ApplicationEvent {
     
     public final UUID id;
     public final Date createDate;
     
     
-    public Event(Object source) {
+    public Eventaa(Object source) {
         super(source);
         
         id = UUID.randomUUID();

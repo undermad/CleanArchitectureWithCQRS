@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>ectimel</groupId>
-            <artifactId>module_b</artifactId>
+            <artifactId>domain</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
