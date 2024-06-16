@@ -13,6 +13,7 @@ import example.value_objects.PackingListName;
 import lombok.Getter;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -37,7 +38,7 @@ public class PackingList extends AggregateRoot<PackingListId> {
         addEvent(new PackingItemAdded(this, item));
     }
 
-    public void addItems(Iterable<PackingItem> items) {
+    public void addItems(List<PackingItem> items) {
         for (var item : items) {
             addItem(item);
         }
@@ -58,7 +59,7 @@ public class PackingList extends AggregateRoot<PackingListId> {
 
     private PackingItem getItem(String itemName) {
         var item = items.stream().filter(i -> i.name() == itemName)
-                .collect(Collectors.toList())
+                .toList()
                 .getFirst();
 
         if (item == null) {
