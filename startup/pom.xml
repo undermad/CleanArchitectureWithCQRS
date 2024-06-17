@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>ectimel</groupId>
-            <artifactId>module_a</artifactId>
+            <artifactId>application</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -34,7 +34,11 @@
             <artifactId>module_shared</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
 
 

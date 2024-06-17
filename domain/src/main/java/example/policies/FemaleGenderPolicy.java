@@ -6,6 +6,7 @@ import example.value_objects.PackingItem;
 import java.util.LinkedList;
 import java.util.List;
 
+@Policy
 public final class FemaleGenderPolicy implements PackingItemPolicy {
     @Override
     public Boolean IsApplicable(PolicyData data) {

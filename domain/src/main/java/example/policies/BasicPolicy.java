@@ -5,6 +5,7 @@ import example.value_objects.PackingItem;
 import java.util.LinkedList;
 import java.util.List;
 
+@Policy
 public final class BasicPolicy implements PackingItemPolicy {
     
     private final short MAXIMUM_NUMBER_OF_CLOTHES = 7; 

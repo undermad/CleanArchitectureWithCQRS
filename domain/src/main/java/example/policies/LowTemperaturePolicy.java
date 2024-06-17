@@ -5,6 +5,7 @@ import example.value_objects.PackingItem;
 import java.util.LinkedList;
 import java.util.List;
 
+@Policy
 public final class LowTemperaturePolicy implements PackingItemPolicy {
     
     @Override

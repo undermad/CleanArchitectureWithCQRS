@@ -23,7 +23,7 @@
     
     <modules>
         <module>startup</module>
-        <module>module_a</module>
+        <module>application</module>
         <module>domain</module>
         <module>module_shared</module>
     </modules>

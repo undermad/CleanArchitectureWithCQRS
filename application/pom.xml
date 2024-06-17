@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>module_a</artifactId>
+    <artifactId>application</artifactId>
 
     <name>module_a</name>
 
@@ -24,6 +24,11 @@
             <artifactId>module_shared</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
+        <dependency>
+            <groupId>ectimel</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
