@@ -21,9 +21,10 @@
 
         <dependency>
             <groupId>ectimel</groupId>
-            <artifactId>application</artifactId>
+            <artifactId>inner_module</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>ectimel</groupId>
             <artifactId>domain</artifactId>
@@ -31,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>ectimel</groupId>
-            <artifactId>module_shared</artifactId>
+            <artifactId>shared</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

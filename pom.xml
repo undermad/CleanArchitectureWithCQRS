@@ -25,7 +25,7 @@
         <module>startup</module>
         <module>application</module>
         <module>domain</module>
-        <module>module_shared</module>
+        <module>shared</module>
     </modules>
     
     <dependencies>

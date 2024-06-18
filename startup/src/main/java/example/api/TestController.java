@@ -1,5 +1,6 @@
 package example.api;
 
+import example.constants.Gender;
 import example.policies.PackingItemPolicy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/api/test")
 public class TestController {
 
+    
 
     private List<PackingItemPolicy> policies;
 
