@@ -1,6 +1,4 @@
-package ectimel.exceptions;
-
-import example.exceptions.PackItException;
+package example.exceptions;
 
 public class PackingListAlreadyExistException extends PackItException {
     public PackingListAlreadyExistException(String name) {

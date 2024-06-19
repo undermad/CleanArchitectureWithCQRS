@@ -1,4 +1,4 @@
-package ectimel;
+package example;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -13,7 +13,7 @@ public class AppTest
     /**
      * Create the test case
      *
-     * @param testName name of the test case
+     * @param testName packingItemName of the test case
      */
     public AppTest( String testName )
     {

@@ -1,6 +1,6 @@
-package ectimel.services;
+package example.services;
 
-import ectimel.dto.external.WeatherDto;
+import example.dto.external.WeatherDto;
 import example.value_objects.Localization;
 
 import java.util.concurrent.CompletableFuture;

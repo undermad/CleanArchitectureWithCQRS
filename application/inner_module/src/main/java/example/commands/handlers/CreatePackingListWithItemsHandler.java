@@ -1,10 +1,10 @@
-package ectimel.commands.handlers;
+package example.commands.handlers;
 
-import ectimel.commands.CreatePackingListWithItems;
-import ectimel.exceptions.PackingListAlreadyExistException;
-import ectimel.exceptions.WeatherNotFoundException;
-import ectimel.services.PackingListReadService;
-import ectimel.services.WeatherService;
+import example.commands.CreatePackingListWithItems;
+import example.exceptions.PackingListAlreadyExistException;
+import example.exceptions.WeatherNotFoundException;
+import example.services.PackingListReadService;
+import example.services.WeatherService;
 import example.commands.CommandHandler;
 import example.factories.PackingListFactory;
 import example.repository.PackingListRepository;
@@ -41,8 +41,13 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
                 throw new PackingListAlreadyExistException(command.name());
             }
 
+//            CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> readService.existsByNameAsync(command.packingItemName()).join());
+//
             var localization = new Localization(command.localization().city(), command.localization().country());
-
+//            CompletableFuture<WeatherDto> weatherFuture = CompletableFuture.supplyAsync(() -> weatherService.GetWeatherAsync(localization).join());
+//
+//            if(future.join()) throw new PackingListAlreadyExistException(command.packingItemName());
+//            if(weatherFuture.join() == null) throw new WeatherNotFoundException(localization);
 
             var weather = weatherService.GetWeatherAsync(localization).join();
 

@@ -1,4 +1,4 @@
-package ectimel.dto.external;
+package example.dto.external;
 
 public record WeatherDto(double temperature) {
 }

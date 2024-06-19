@@ -1,6 +1,5 @@
-package ectimel.commands;
+package example.commands;
 
-import example.commands.Command;
 import example.constants.Gender;
 
 import java.util.UUID;

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class CommandMediatorImpl implements CommandMediator {
+public class CommandDispatcherImpl implements CommandDispatcher {
     
     private final Map<Class<? extends Command>, CommandHandler<? extends Command>> handlers = new HashMap<>();
     
