@@ -6,19 +6,23 @@ public class Main {
 
     public static void main(String[] args) {
         
-        if(test().join()) {
-            System.out.println("Abc");
-        }
+        abc abc = new Aaa() {};
 
-        System.out.println("Should be after abc");
+        abc aa = new asd();
         
-        while (true) {
+        System.out.println(aa.getClass().getName());
         
-        }
-    }
-    
-    public static CompletableFuture<Boolean> test() {
-        return CompletableFuture.supplyAsync(() -> true);
-    }
+        
+        
+    }    
+}
+
+class asd implements abc {
     
 }
+
+interface abc{}
+
+interface Aaa extends abc {}
+
+interface Bbb extends abc {}
