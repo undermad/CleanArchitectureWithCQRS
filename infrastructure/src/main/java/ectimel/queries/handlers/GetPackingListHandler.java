@@ -26,4 +26,6 @@ public class GetPackingListHandler implements QueryHandler<GetPackingList, Packi
             return packingListDto;
         });
     }
+    
+    
 }

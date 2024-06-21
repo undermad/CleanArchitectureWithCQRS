@@ -33,8 +33,12 @@
         <dependency>
             <groupId>ectimel</groupId>
             <artifactId>inner_module</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
+
+
+        
+        
     </dependencies>
 </project>

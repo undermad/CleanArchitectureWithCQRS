@@ -1,6 +1,5 @@
 package example.api;
 
-import example.constants.Gender;
 import example.policies.PackingItemPolicy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
