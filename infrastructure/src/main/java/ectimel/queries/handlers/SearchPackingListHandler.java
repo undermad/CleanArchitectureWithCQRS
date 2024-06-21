@@ -1,4 +1,4 @@
-package example.queries.handlers;
+package ectimel.queries.handlers;
 
 import example.dto.PackingListDto;
 import example.queries.QueryHandler;

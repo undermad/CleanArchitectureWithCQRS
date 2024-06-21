@@ -1,8 +1,6 @@
-package example.queries.handlers;
+package ectimel.queries.handlers;
 
-import example.dto.PackingItemDto;
 import example.dto.PackingListDto;
-import example.entities.PackingList;
 import example.queries.GetPackingList;
 import example.queries.QueryHandler;
 import example.repository.PackingListRepository;
