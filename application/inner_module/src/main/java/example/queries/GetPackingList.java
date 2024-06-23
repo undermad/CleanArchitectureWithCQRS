@@ -4,6 +4,5 @@ import example.dto.PackingListDto;
 
 import java.util.UUID;
 
-public class GetPackingList  implements Query<PackingListDto> {
-    private UUID uuid;
+public record GetPackingList(UUID uuid)  implements Query<PackingListDto> {
 }

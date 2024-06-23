@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Table(name = "localization")
 @Entity
-public record LocalizationReadModel(
+public record LocalizationEntity(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         UUID id,
@@ -19,7 +19,7 @@ public record LocalizationReadModel(
 
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
-        PackingListReadModel packingListReadModel
+        PackingListEntity packingListEntity
 
 ) {
 }

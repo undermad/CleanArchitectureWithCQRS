@@ -1,5 +1,6 @@
-package example.services;
+package ectimel.repositories.write;
 
+import ectimel.repositories.read.PackingListJpaRepository;
 import example.entities.PackingList;
 import example.repository.PackingListRepository;
 import example.value_objects.PackingListId;
@@ -9,11 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.concurrent.CompletableFuture;
 
 @Repository
-public class PackingListRespositoryImplTest implements PackingListRepository {
-    @Override
-    public CompletableFuture<Boolean> existAsync(PackingListName name) {
-        return null;
-    }
+public class MySQLPackingListRepository implements PackingListRepository {
 
     @Override
     public CompletableFuture<PackingList> getAsync(PackingListId id) {

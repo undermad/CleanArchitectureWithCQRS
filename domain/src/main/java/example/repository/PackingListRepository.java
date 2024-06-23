@@ -7,7 +7,6 @@ import example.value_objects.PackingListName;
 import java.util.concurrent.CompletableFuture;
 
 public interface PackingListRepository {
-    CompletableFuture<Boolean> existAsync(PackingListName name);
     
     CompletableFuture<PackingList> getAsync(PackingListId id);
 
