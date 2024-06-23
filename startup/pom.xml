@@ -19,12 +19,6 @@
 
     <dependencies>
 
-
-        <dependency>
-            <groupId>ectimel</groupId>
-            <artifactId>application</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         
         <dependency>
             <groupId>ectimel</groupId>
