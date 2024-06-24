@@ -6,13 +6,19 @@ import example.value_objects.PackingItem;
 import example.value_objects.PackingListId;
 import example.value_objects.PackingListName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "packing_list")
 @Entity
 public class PackingListEntity {
@@ -47,5 +53,6 @@ public class PackingListEntity {
         
         return packingList;
     }
+    
 
 }

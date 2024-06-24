@@ -2,7 +2,7 @@ package ectimel.queries.handlers;
 
 import ectimel.mappers.read.PackingListToDtoMapper;
 import ectimel.models.read.PackingListEntity;
-import ectimel.repositories.read.PackingListJpaRepository;
+import ectimel.repositories.read.PackingListReadJpaRepository;
 import example.dto.PackingListDto;
 import example.queries.QueryHandler;
 import example.queries.SearchPackingList;
@@ -14,10 +14,10 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class SearchPackingListHandler implements QueryHandler<SearchPackingList, List<PackingListDto>> {
 
-    private final PackingListJpaRepository repository;
+    private final PackingListReadJpaRepository repository;
     private final PackingListToDtoMapper packingListToDtoMapper;
 
-    public SearchPackingListHandler(PackingListJpaRepository repository, PackingListToDtoMapper packingListToDtoMapper) {
+    public SearchPackingListHandler(PackingListReadJpaRepository repository, PackingListToDtoMapper packingListToDtoMapper) {
         this.repository = repository;
         this.packingListToDtoMapper = packingListToDtoMapper;
     }
