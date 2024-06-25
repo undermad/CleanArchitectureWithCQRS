@@ -27,12 +27,8 @@ public class InMemoryQueryDispatcher implements QueryDispatcher, ApplicationCont
     public <TResult> CompletableFuture<TResult> query(Query<TResult> query) {
 
         String queryName = query.getClass().getSimpleName();
+        queryName = queryName.substring(0, 1).toLowerCase() + queryName.substring(1);
         var type = query.getClass().getGenericSuperclass();
-//        if (type instanceof ParameterizedType) {
-//            ParameterizedType parameterizedType = (ParameterizedType) type;
-//            Type actualTypeArgument = parameterizedType.getActualTypeArguments()[0];
-//            Class<?> actualTypeClass = (Class<?>) actualTypeArgument;
-//        }
 
         Object handlerBean = applicationContext.getBean(queryName + "Handler");
         if (handlerBean instanceof QueryHandler) {

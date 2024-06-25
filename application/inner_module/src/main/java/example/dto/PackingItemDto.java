@@ -2,6 +2,6 @@ package example.dto;
 
 import java.util.UUID;
 
-public record PackingItemDto(String name, Integer quantity, Boolean isPackied) {
+public record PackingItemDto(UUID uuid, String name, Integer quantity, Boolean isPackied) {
 
 }

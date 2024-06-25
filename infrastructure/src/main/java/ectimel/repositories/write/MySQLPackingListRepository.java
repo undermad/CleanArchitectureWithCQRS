@@ -1,8 +1,7 @@
 package ectimel.repositories.write;
 
 import ectimel.exception.PackingListNotFoundException;
-import ectimel.mappers.read.PackingListToDtoMapper;
-import ectimel.repositories.read.PackingListReadJpaRepository;
+import ectimel.models.read.PackingListEntity;
 import example.entities.PackingList;
 import example.repository.PackingListRepository;
 import example.value_objects.PackingListId;
@@ -29,18 +28,22 @@ public class MySQLPackingListRepository implements PackingListRepository {
 
     @Override
     public CompletableFuture<Void> addAsync(PackingList packingList) {
-        return CompletableFuture.supplyAsync(() -> {
-            return null;
+        return CompletableFuture.runAsync(() -> {
+            repository.save(PackingListEntity.toEntity(packingList));
         });
     }
 
     @Override
     public CompletableFuture<Void> updateAsync(PackingList packingList) {
-        return null;
+        return CompletableFuture.runAsync(() -> {
+           repository.save(PackingListEntity.toEntity(packingList)); 
+        });
     }
 
     @Override
     public CompletableFuture<Void> deleteAsync(PackingList packingList) {
-        return null;
+        return CompletableFuture.runAsync(() -> {
+            repository.deleteById(packingList.getUuid().value());
+        });
     }
 }

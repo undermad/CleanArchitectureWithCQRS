@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = "ectimel")
+@ComponentScan(basePackages = {"ectimel", "example"})
 @EnableJpaRepositories(basePackages = "ectimel.repositories")
 @EntityScan(basePackages = {"ectimel"})
 public class ModdMonnApplication {

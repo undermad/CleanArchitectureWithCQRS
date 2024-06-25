@@ -28,7 +28,11 @@ public record PackingItemEntity(
 
 
     public PackingItem toDomain() {
-        return new PackingItem(this.name, this.quantity, this.isPacked);
+        return new PackingItem(this.id, this.name, this.quantity, this.isPacked);
+    }
+    
+    public static PackingItemEntity create(PackingItem packingItem, PackingListEntity packingListEntity) {
+        return new PackingItemEntity(packingItem.uuid(), packingItem.name(), packingItem.quantity(), packingItem.isPacked(), packingListEntity);
     }
 
 }

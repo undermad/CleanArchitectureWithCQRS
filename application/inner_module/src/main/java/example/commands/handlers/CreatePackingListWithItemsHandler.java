@@ -9,11 +9,12 @@ import example.commands.CommandHandler;
 import example.factories.PackingListFactory;
 import example.repository.PackingListRepository;
 import example.value_objects.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
-@Component
+@Component("createPackingListWithItemsHandler")
 public class CreatePackingListWithItemsHandler implements CommandHandler<CreatePackingListWithItems> {
 
     private final PackingListRepository repository;

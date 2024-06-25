@@ -27,7 +27,7 @@ public class PackingListToDtoMapper implements Mapper<PackingList, PackingListDt
         return new PackingList(
                 new PackingListId(packingListDto.getUuid()),
                 new PackingListName(packingListDto.getName()),
-                new Localization(packingListDto.getLocalizationDto().city(), packingListDto.getLocalizationDto().country())
+                new Localization(packingListDto.getLocalizationDto().uuid(), packingListDto.getLocalizationDto().city(), packingListDto.getLocalizationDto().country())
         );
     }
 
@@ -37,6 +37,7 @@ public class PackingListToDtoMapper implements Mapper<PackingList, PackingListDt
                 packingList.getUuid().value(),
                 packingList.getName().value(),
                 new LocalizationDto(
+                        packingList.getLocalization().uuid(),
                         packingList.getLocalization().city(),
                         packingList.getLocalization().country()),
                 packingList.getItems().stream()

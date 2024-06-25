@@ -41,6 +41,11 @@
             <artifactId>infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ectimel</groupId>
+            <artifactId>presentation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
 
     </dependencies>

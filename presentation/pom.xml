@@ -7,30 +7,29 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>infrastructure</artifactId>
+    <artifactId>presentation</artifactId>
+    <packaging>jar</packaging>
 
-    <name>infrastructure</name>
+    <name>presentation</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>ectimel</groupId>
             <artifactId>shared</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>ectimel</groupId>
             <artifactId>inner_module</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
-
-
+        
+        
+        
         
         
     </dependencies>

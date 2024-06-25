@@ -1,22 +1,18 @@
 package ectimel.models.read;
 
 import example.entities.PackingList;
-import example.value_objects.Localization;
 import example.value_objects.PackingItem;
 import example.value_objects.PackingListId;
 import example.value_objects.PackingListName;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "packing_list")
@@ -41,18 +37,35 @@ public class PackingListEntity {
         PackingList packingList = new PackingList(
                 new PackingListId(this.id),
                 new PackingListName(this.getName()),
-                new Localization(
-                        this.localizationEntity.city(),
-                        this.localizationEntity.country()));
+                localizationEntity.toDomain());
 
         List<PackingItem> packingItemList = this.items.stream()
                 .map(PackingItemEntity::toDomain)
                 .toList();
-        
+
         packingList.addItems(packingItemList);
-        
+
         return packingList;
     }
-    
+
+    public static PackingListEntity toEntity(PackingList packingList) {
+
+        var packingListEntity = new PackingListEntity();
+        packingListEntity.setLocalizationEntity(new LocalizationEntity(
+                packingList.getLocalization().uuid(),
+                packingListEntity.localizationEntity.city,
+                packingListEntity.getLocalizationEntity().country,
+                packingListEntity));
+        
+        packingListEntity.setItems(packingList.getItems().stream()
+                .map(packingItem -> PackingItemEntity.create(packingItem, packingListEntity))
+                .toList());
+
+        packingListEntity.setId(packingList.getUuid().value());
+        packingListEntity.setName(packingList.getName().value());
+        
+        return packingListEntity;
+    }
+
 
 }

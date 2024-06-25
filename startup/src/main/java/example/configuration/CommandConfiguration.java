@@ -13,6 +13,7 @@ public class CommandConfiguration {
     private final RemovePackingItemHandler removePackingItemHandler;
     private final DeletePackingListHandler deletePackingListHandler;
     private final PackItemHandler packItemHandler;
+    
 
     public CommandConfiguration(CreatePackingListWithItemsHandler createPackingListWithItemsHandler, AddPackingItemHandler addPackingItemHandler, RemovePackingItemHandler removePackingItemHandler, DeletePackingListHandler deletePackingListHandler, PackItemHandler packItemHandler) {
         this.createPackingListWithItemsHandler = createPackingListWithItemsHandler;

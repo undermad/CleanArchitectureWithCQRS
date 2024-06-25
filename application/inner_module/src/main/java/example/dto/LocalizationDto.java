@@ -1,4 +1,6 @@
 package example.dto;
 
-public record LocalizationDto(String city, String country) {
+import java.util.UUID;
+
+public record LocalizationDto(UUID uuid,String city, String country) {
 }
