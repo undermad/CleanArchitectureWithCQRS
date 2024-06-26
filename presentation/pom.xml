@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>ectimel</groupId>
-            <artifactId>inner_module</artifactId>
+            <artifactId>infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
         
