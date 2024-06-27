@@ -5,7 +5,5 @@ import lombok.Getter;
 
 import java.util.List;
 
-@Getter
-public class SearchPackingList implements Query<List<PackingListDto>> {
-    private String searchPhrase;
+public record SearchPackingList(String queryString) implements Query<List<PackingListDto>> {
 }

@@ -26,7 +26,7 @@ public class RemovePackingItemHandler implements CommandHandler<RemovePackingIte
             if (packingList == null) throw new PackingListDoesntExistException(command.packingListId());
             
             packingList.removeItem(command.packingItemName());
-            repository.updateAsync(packingList);
+            repository.updateAsync(packingList).join();
         });
     }
 }

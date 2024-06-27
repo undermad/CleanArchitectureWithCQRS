@@ -16,7 +16,6 @@ import java.util.UUID;
 public class LocalizationEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
     @Column(name = "city")
@@ -25,7 +24,7 @@ public class LocalizationEntity {
     @Column(name = "country")
     String country;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "packing_list_id", referencedColumnName = "id")
     PackingListEntity packingListEntity;
 

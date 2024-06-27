@@ -25,7 +25,7 @@ public class PackItemHandler implements CommandHandler<PackItem> {
             if(packingList == null) throw new PackingListDoesntExistException(command.packingListId());
             
             packingList.packItem(command.packingItemName());
-            repository.updateAsync(packingList);
+            repository.updateAsync(packingList).join();
         });
     }
 }

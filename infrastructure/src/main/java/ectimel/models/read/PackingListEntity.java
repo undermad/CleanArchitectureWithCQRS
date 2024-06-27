@@ -20,16 +20,15 @@ import java.util.UUID;
 public class PackingListEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "packingListEntity", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "packingListEntity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private LocalizationEntity localizationEntity;
 
-    @OneToMany(mappedBy = "packingListEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "packingListEntity", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<PackingItemEntity> items;
 
 
@@ -53,8 +52,8 @@ public class PackingListEntity {
         var packingListEntity = new PackingListEntity();
         packingListEntity.setLocalizationEntity(new LocalizationEntity(
                 packingList.getLocalization().uuid(),
-                packingListEntity.localizationEntity.city,
-                packingListEntity.getLocalizationEntity().country,
+                packingList.getLocalization().city(),
+                packingList.getLocalization().country(),
                 packingListEntity));
         
         packingListEntity.setItems(packingList.getItems().stream()

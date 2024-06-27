@@ -8,7 +8,6 @@ public record PackingItem(UUID uuid,String name, Integer quantity, Boolean isPac
 
     public PackingItem {
         if (name.isBlank()) throw new EmptyPackingListItemException();
-        quantity = 0;
     }
     
     public PackingItem(String name, Integer quantity, Boolean isPacked) {

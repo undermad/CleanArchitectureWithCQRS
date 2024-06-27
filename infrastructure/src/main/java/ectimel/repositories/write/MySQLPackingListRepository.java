@@ -5,45 +5,52 @@ import ectimel.models.read.PackingListEntity;
 import example.entities.PackingList;
 import example.repository.PackingListRepository;
 import example.value_objects.PackingListId;
+import jakarta.persistence.EntityManager;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.CompletableFuture;
 
+@Async
+@Transactional
 @Repository
 public class MySQLPackingListRepository implements PackingListRepository {
-    
+
     private final PackingListWriteJpaRepository repository;
 
-    public MySQLPackingListRepository(PackingListWriteJpaRepository repository) {
+    private final EntityManager entityManager;
+
+    public MySQLPackingListRepository(PackingListWriteJpaRepository repository, EntityManager entityManager) {
         this.repository = repository;
+        this.entityManager = entityManager;
     }
 
 
     @Override
     public CompletableFuture<PackingList> getAsync(PackingListId id) {
-        return CompletableFuture.supplyAsync(() -> repository.findById(id.value())
+        var packingList = repository.findById(id.value())
                 .orElseThrow(() -> new PackingListNotFoundException(id.value()))
-                .toDomain());
+                .toDomain();
+
+        return CompletableFuture.completedFuture(packingList);
     }
 
     @Override
     public CompletableFuture<Void> addAsync(PackingList packingList) {
-        return CompletableFuture.runAsync(() -> {
-            repository.save(PackingListEntity.toEntity(packingList));
-        });
+        entityManager.persist(PackingListEntity.toEntity(packingList));
+        return CompletableFuture.completedFuture(null);
     }
 
     @Override
     public CompletableFuture<Void> updateAsync(PackingList packingList) {
-        return CompletableFuture.runAsync(() -> {
-           repository.save(PackingListEntity.toEntity(packingList)); 
-        });
+        repository.save(PackingListEntity.toEntity(packingList));
+        return CompletableFuture.completedFuture(null);
     }
 
     @Override
     public CompletableFuture<Void> deleteAsync(PackingList packingList) {
-        return CompletableFuture.runAsync(() -> {
-            repository.deleteById(packingList.getUuid().value());
-        });
+        entityManager.remove(PackingListEntity.toEntity(packingList));
+        return CompletableFuture.completedFuture(null);
     }
 }

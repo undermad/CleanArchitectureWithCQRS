@@ -12,6 +12,7 @@ import example.value_objects.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Component("createPackingListWithItemsHandler")
@@ -57,7 +58,7 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
             }
 
             var packingList = packingListFactory.createWithDefaultItems(
-                    new PackingListId(command.id()),
+                    new PackingListId(UUID.randomUUID()),
                     new PackingListName(command.name()),
                     localization,
                     new TravelDays(command.days()),

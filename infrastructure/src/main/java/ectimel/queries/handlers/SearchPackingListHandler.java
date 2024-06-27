@@ -25,7 +25,7 @@ public class SearchPackingListHandler implements QueryHandler<SearchPackingList,
     @Override
     public CompletableFuture<List<PackingListDto>> handleAsync(SearchPackingList query) {
         return CompletableFuture.supplyAsync(() -> {
-            List<PackingListEntity> packingListEntities = repository.findAllByQuery(query.getSearchPhrase());
+            List<PackingListEntity> packingListEntities = repository.findAllByQuery(query.queryString());
             return packingListEntities.stream()
                     .map(PackingListEntity::toDomain)
                     .map(packingListToDtoMapper::mapToB)
