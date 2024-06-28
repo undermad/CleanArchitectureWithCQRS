@@ -32,7 +32,7 @@ public class PackingListController {
     }
     
     @GetMapping()
-    public ResponseEntity<List<PackingListDto>> getPackingListByQuery(@RequestParam(required = true) String queryString){
+    public ResponseEntity<List<PackingListDto>> getPackingListByQuery(@RequestParam String queryString){
         Query<List<PackingListDto>> query = new SearchPackingList(queryString);
         return ResponseEntity.ok(queryDispatcher.query(query).join());
     }

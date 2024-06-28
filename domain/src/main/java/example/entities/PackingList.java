@@ -58,7 +58,7 @@ public class PackingList extends AggregateRoot<PackingListId> {
     }
 
     private PackingItem getItem(String itemName) {
-        var item = items.stream().filter(i -> i.name() == itemName)
+        var item = items.stream().filter(i -> i.name().equals(itemName))
                 .toList()
                 .getFirst();
 

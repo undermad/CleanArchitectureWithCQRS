@@ -2,35 +2,42 @@ package ectimel.queries.handlers;
 
 import ectimel.exception.PackingListNotFoundException;
 import ectimel.mappers.read.PackingListToDtoMapper;
-import ectimel.repositories.read.PackingListReadJpaRepository;
+import ectimel.models.read.PackingListEntity;
 import example.dto.PackingListDto;
-import example.entities.PackingList;
 import example.queries.GetPackingList;
 import example.queries.QueryHandler;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceUnit;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.CompletableFuture;
 
 @Component
 public class GetPackingListHandler implements QueryHandler<GetPackingList, PackingListDto> {
 
-    private final PackingListReadJpaRepository repository;
-    private final PackingListToDtoMapper packingListMapper;
+    private final PackingListToDtoMapper packingListToDtoMapper;
 
-    public GetPackingListHandler(PackingListReadJpaRepository repository, PackingListToDtoMapper packingListMapper) {
-        this.repository = repository;
-        this.packingListMapper = packingListMapper;
+    @PersistenceContext(unitName = "puRead")
+    private final EntityManager entityManager;
+
+    public GetPackingListHandler(PackingListToDtoMapper packingListToDtoMapper, EntityManager entityManager) {
+        this.packingListToDtoMapper = packingListToDtoMapper;
+        this.entityManager = entityManager;
     }
 
 
+    @Async
+    @Transactional(transactionManager = "readTransactionManager")
     @Override
     public CompletableFuture<PackingListDto> handleAsync(GetPackingList query) {
-        return CompletableFuture.supplyAsync(() -> {
-            PackingList packingList = repository.findById(query.uuid())
-                    .orElseThrow(() -> new PackingListNotFoundException(query.uuid()))
-                    .toDomain();
-            return packingListMapper.mapToB(packingList);
-        });
+            var entity = entityManager.find(PackingListEntity.class, query.uuid());
+            if(entity == null) throw new PackingListNotFoundException(query.uuid());
+            
+            return CompletableFuture.completedFuture(packingListToDtoMapper.mapToB(entity.toDomain()));
     }
 
 

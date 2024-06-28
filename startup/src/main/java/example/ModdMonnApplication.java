@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"ectimel", "example"})
-@EnableJpaRepositories(basePackages = "ectimel.repositories")
 @EntityScan(basePackages = {"ectimel"})
 public class ModdMonnApplication {
 

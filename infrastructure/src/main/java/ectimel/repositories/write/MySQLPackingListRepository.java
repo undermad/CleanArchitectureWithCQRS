@@ -5,7 +5,10 @@ import ectimel.models.read.PackingListEntity;
 import example.entities.PackingList;
 import example.repository.PackingListRepository;
 import example.value_objects.PackingListId;
+import example.value_objects.PackingListName;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,27 +16,32 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.concurrent.CompletableFuture;
 
 @Async
-@Transactional
+@Transactional(transactionManager = "writeTransactionManager")
 @Repository
 public class MySQLPackingListRepository implements PackingListRepository {
 
-    private final PackingListWriteJpaRepository repository;
-
+    @PersistenceContext(unitName = "puWrite")
     private final EntityManager entityManager;
 
-    public MySQLPackingListRepository(PackingListWriteJpaRepository repository, EntityManager entityManager) {
-        this.repository = repository;
+    public MySQLPackingListRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
 
     @Override
-    public CompletableFuture<PackingList> getAsync(PackingListId id) {
-        var packingList = repository.findById(id.value())
-                .orElseThrow(() -> new PackingListNotFoundException(id.value()))
-                .toDomain();
+    public CompletableFuture<Boolean> existsByNameAsync(PackingListName packingListName) {
+        Query query = entityManager.createQuery("SELECT CASE WHEN COUNT(pl) > 0 THEN TRUE ELSE FALSE END FROM PackingListEntity pl WHERE pl.name = :name");
+        query.setParameter("name", packingListName.value());
+        
+        return CompletableFuture.completedFuture((Boolean) query.getSingleResult());
+    }
 
-        return CompletableFuture.completedFuture(packingList);
+    @Override
+    public CompletableFuture<PackingList> getAsync(PackingListId id) {
+        var entity = entityManager.find(PackingListEntity.class, id.value());
+        if (entity == null) throw new PackingListNotFoundException(id.value());
+
+        return CompletableFuture.completedFuture(entity.toDomain());
     }
 
     @Override
@@ -44,13 +52,16 @@ public class MySQLPackingListRepository implements PackingListRepository {
 
     @Override
     public CompletableFuture<Void> updateAsync(PackingList packingList) {
-        repository.save(PackingListEntity.toEntity(packingList));
+        entityManager.merge(PackingListEntity.toEntity(packingList));
         return CompletableFuture.completedFuture(null);
     }
 
     @Override
     public CompletableFuture<Void> deleteAsync(PackingList packingList) {
-        entityManager.remove(PackingListEntity.toEntity(packingList));
+        var entity = entityManager.find(PackingListEntity.class, packingList.getUuid().value());
+        if (entity != null) {
+            entityManager.remove(entity);
+        }
         return CompletableFuture.completedFuture(null);
     }
 }

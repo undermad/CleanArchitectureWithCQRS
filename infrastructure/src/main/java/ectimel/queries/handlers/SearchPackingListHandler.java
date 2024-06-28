@@ -2,11 +2,17 @@ package ectimel.queries.handlers;
 
 import ectimel.mappers.read.PackingListToDtoMapper;
 import ectimel.models.read.PackingListEntity;
-import ectimel.repositories.read.PackingListReadJpaRepository;
 import example.dto.PackingListDto;
 import example.queries.QueryHandler;
 import example.queries.SearchPackingList;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceContexts;
+import jakarta.persistence.TypedQuery;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -14,22 +20,30 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class SearchPackingListHandler implements QueryHandler<SearchPackingList, List<PackingListDto>> {
 
-    private final PackingListReadJpaRepository repository;
     private final PackingListToDtoMapper packingListToDtoMapper;
 
-    public SearchPackingListHandler(PackingListReadJpaRepository repository, PackingListToDtoMapper packingListToDtoMapper) {
-        this.repository = repository;
+    @Qualifier("readEntityManager")
+    private final EntityManager entityManager;
+
+    public SearchPackingListHandler(PackingListToDtoMapper packingListToDtoMapper, EntityManager entityManager) {
         this.packingListToDtoMapper = packingListToDtoMapper;
+        this.entityManager = entityManager;
     }
 
+    @Async
+    @Transactional(transactionManager = "readTransactionManager")
     @Override
     public CompletableFuture<List<PackingListDto>> handleAsync(SearchPackingList query) {
-        return CompletableFuture.supplyAsync(() -> {
-            List<PackingListEntity> packingListEntities = repository.findAllByQuery(query.queryString());
-            return packingListEntities.stream()
-                    .map(PackingListEntity::toDomain)
-                    .map(packingListToDtoMapper::mapToB)
-                    .toList();
-        });
+        
+        
+        TypedQuery<PackingListEntity> typedQuery = entityManager.createQuery(
+                "SELECT p FROM PackingListEntity p WHERE p.name LIKE :name", PackingListEntity.class);
+        typedQuery.setParameter("name", "%" + query.queryString() + "%");
+
+        return CompletableFuture.completedFuture(typedQuery.getResultList()
+                .stream()
+                .map(PackingListEntity::toDomain)
+                .map(packingListToDtoMapper::mapToB)
+                .toList());
     }
 }

@@ -22,11 +22,11 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
 
     private final PackingListFactory packingListFactory;
 
-    private final PackingListReadService readService;
+    private final PackingListRepository readService;
 
     private final WeatherService weatherService;
 
-    public CreatePackingListWithItemsHandler(PackingListRepository repository, PackingListFactory packingListFactory, PackingListReadService readService, WeatherService weatherService) {
+    public CreatePackingListWithItemsHandler(PackingListRepository repository, PackingListFactory packingListFactory, PackingListRepository readService, WeatherService weatherService) {
         this.repository = repository;
         this.packingListFactory = packingListFactory;
         this.readService = readService;
@@ -39,17 +39,11 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
 
         return CompletableFuture.runAsync(() -> {
 
-            if (readService.existsByNameAsync(command.name()).join()) {
+            if (readService.existsByNameAsync(new PackingListName(command.name())).join()) {
                 throw new PackingListAlreadyExistException(command.name());
             }
 
-//            CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> readService.existsByNameAsync(command.packingItemName()).join());
-//
             var localization = new Localization(command.localization().city(), command.localization().country());
-//            CompletableFuture<WeatherDto> weatherFuture = CompletableFuture.supplyAsync(() -> weatherService.GetWeatherAsync(localization).join());
-//
-//            if(future.join()) throw new PackingListAlreadyExistException(command.packingItemName());
-//            if(weatherFuture.join() == null) throw new WeatherNotFoundException(localization);
 
             var weather = weatherService.GetWeatherAsync(localization).join();
 
