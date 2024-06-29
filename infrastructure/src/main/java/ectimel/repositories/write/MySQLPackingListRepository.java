@@ -9,6 +9,7 @@ import example.value_objects.PackingListName;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class MySQLPackingListRepository implements PackingListRepository {
     @PersistenceContext(unitName = "puWrite")
     private final EntityManager entityManager;
 
-    public MySQLPackingListRepository(EntityManager entityManager) {
+    public MySQLPackingListRepository(@Qualifier("writeEntityManagerFactory") EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

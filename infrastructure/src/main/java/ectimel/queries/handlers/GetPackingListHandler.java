@@ -24,7 +24,9 @@ public class GetPackingListHandler implements QueryHandler<GetPackingList, Packi
     @PersistenceContext(unitName = "puRead")
     private final EntityManager entityManager;
 
-    public GetPackingListHandler(PackingListToDtoMapper packingListToDtoMapper, EntityManager entityManager) {
+    public GetPackingListHandler(PackingListToDtoMapper packingListToDtoMapper,
+                                 @Qualifier("readEntityManagerFactory") 
+                                 EntityManager entityManager) {
         this.packingListToDtoMapper = packingListToDtoMapper;
         this.entityManager = entityManager;
     }

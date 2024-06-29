@@ -25,7 +25,7 @@ public class SearchPackingListHandler implements QueryHandler<SearchPackingList,
     @Qualifier("readEntityManager")
     private final EntityManager entityManager;
 
-    public SearchPackingListHandler(PackingListToDtoMapper packingListToDtoMapper, EntityManager entityManager) {
+    public SearchPackingListHandler(PackingListToDtoMapper packingListToDtoMapper,@Qualifier("readEntityManagerFactory")  EntityManager entityManager) {
         this.packingListToDtoMapper = packingListToDtoMapper;
         this.entityManager = entityManager;
     }

@@ -3,11 +3,8 @@ package example.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +25,7 @@ import javax.sql.DataSource;
 )
 public class WritePersistenceContextConfiguration {
 
+    @Primary
     @Bean(name = "writeEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean writeEntityManagerFactory(
             EntityManagerFactoryBuilder builder, DataSource dataSource, JpaProperties jpaProperties) {
@@ -39,6 +37,7 @@ public class WritePersistenceContextConfiguration {
                 .build();
     }
 
+    @Primary
     @Bean(name = "writeTransactionManager")
     public PlatformTransactionManager transactionManager1(
             @Qualifier("writeEntityManagerFactory") EntityManagerFactory entityManagerFactory) {

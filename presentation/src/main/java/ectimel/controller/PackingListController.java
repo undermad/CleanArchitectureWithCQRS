@@ -1,5 +1,6 @@
 package ectimel.controller;
 
+import ectimel.exceptions.InvalidUUIDException;
 import example.commands.*;
 import example.dto.PackingListDto;
 import example.queries.GetPackingList;
@@ -27,6 +28,7 @@ public class PackingListController {
 
     @GetMapping("/{packingListId}")
     public ResponseEntity<PackingListDto> getPackingList(@PathVariable String packingListId) {
+        if(packingListId.length() != 36) throw new InvalidUUIDException(packingListId);
         Query<PackingListDto> query = new GetPackingList(UUID.fromString(packingListId));
         return ResponseEntity.ok(queryDispatcher.query(query).join());
     }
