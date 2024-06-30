@@ -29,13 +29,7 @@ public class MySQLPackingListRepository implements PackingListRepository {
     }
 
 
-    @Override
-    public CompletableFuture<Boolean> existsByNameAsync(PackingListName packingListName) {
-        Query query = entityManager.createQuery("SELECT CASE WHEN COUNT(pl) > 0 THEN TRUE ELSE FALSE END FROM PackingListEntity pl WHERE pl.name = :name");
-        query.setParameter("name", packingListName.value());
-        
-        return CompletableFuture.completedFuture((Boolean) query.getSingleResult());
-    }
+
 
     @Override
     public CompletableFuture<PackingList> getAsync(PackingListId id) {

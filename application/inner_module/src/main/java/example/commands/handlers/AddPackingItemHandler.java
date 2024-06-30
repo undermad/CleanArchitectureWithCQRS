@@ -4,7 +4,6 @@ import example.commands.AddPackingItem;
 import example.commands.CommandHandler;
 import example.exceptions.PackingListDoesntExistException;
 import example.repository.PackingListRepository;
-import example.services.PackingListReadService;
 import example.value_objects.PackingItem;
 import example.value_objects.PackingListId;
 import org.springframework.stereotype.Component;

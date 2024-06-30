@@ -9,7 +9,6 @@ import example.commands.CommandHandler;
 import example.factories.PackingListFactory;
 import example.repository.PackingListRepository;
 import example.value_objects.*;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -22,11 +21,11 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
 
     private final PackingListFactory packingListFactory;
 
-    private final PackingListRepository readService;
+    private final PackingListReadService readService;
 
     private final WeatherService weatherService;
 
-    public CreatePackingListWithItemsHandler(PackingListRepository repository, PackingListFactory packingListFactory, PackingListRepository readService, WeatherService weatherService) {
+    public CreatePackingListWithItemsHandler(PackingListRepository repository, PackingListFactory packingListFactory, PackingListReadService readService, WeatherService weatherService) {
         this.repository = repository;
         this.packingListFactory = packingListFactory;
         this.readService = readService;
@@ -39,7 +38,7 @@ public class CreatePackingListWithItemsHandler implements CommandHandler<CreateP
 
         return CompletableFuture.runAsync(() -> {
 
-            if (readService.existsByNameAsync(new PackingListName(command.name())).join()) {
+            if (readService.existByNameAsync(command.name()).join()) {
                 throw new PackingListAlreadyExistException(command.name());
             }
 

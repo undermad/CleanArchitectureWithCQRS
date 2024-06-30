@@ -11,13 +11,9 @@ public class Main {
 
 
         int[] arr = {1, 2, 3, 4, 5};
-        int[] arr2 = {2, 3, 4};
 
-        List<Integer> a = List.of(1, 2 ,3,4,5,6,7);
-        
-        a.stream().mapToInt(Integer::intValue)
-                .toArray();
-        
-        
+        int[] test = new int[arr.length];
+
+        System.out.println(test.length);
     }
 }
