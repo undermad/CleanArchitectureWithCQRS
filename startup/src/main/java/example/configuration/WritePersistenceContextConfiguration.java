@@ -31,7 +31,7 @@ public class WritePersistenceContextConfiguration {
             EntityManagerFactoryBuilder builder, DataSource dataSource, JpaProperties jpaProperties) {
         return builder
                 .dataSource(dataSource)
-                .packages("ectimel")
+                .packages("ectimel.models.read")
                 .persistenceUnit("puWrite")
                 .properties(jpaProperties.getProperties())
                 .build();

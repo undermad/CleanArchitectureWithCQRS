@@ -19,11 +19,6 @@ public class InMemoryQueryDispatcher implements QueryDispatcher, ApplicationCont
 
 
     @Override
-    public <TQuery extends Query<TResult>, TResult> void registerHandlers(Class<TQuery> queryType, QueryHandler<TQuery, TResult> handler) {
-
-    }
-
-    @Override
     public <TResult> CompletableFuture<TResult> query(Query<TResult> query) {
 
         String queryName = query.getClass().getSimpleName();

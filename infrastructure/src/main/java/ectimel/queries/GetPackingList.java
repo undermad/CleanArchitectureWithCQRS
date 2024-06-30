@@ -1,6 +1,7 @@
-package example.queries;
+package ectimel.queries;
 
 import example.dto.PackingListDto;
+import example.queries.Query;
 
 import java.util.UUID;
 

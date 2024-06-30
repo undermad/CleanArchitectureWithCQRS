@@ -14,149 +14,73 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     @ExceptionHandler(PackingListNotFoundException.class)
-    public ResponseEntity<ErrorResponse> packingListNotFoundException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponse> handlePackingListNotFoundException(PackingListNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.NOT_FOUND);
     }
-
 
     @ExceptionHandler(PackingListAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> PackingListAlreadyExistException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorResponse> handlePackingListAlreadyExistException(PackingListAlreadyExistException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(PackingListDoesntExistException.class)
-    public ResponseEntity<ErrorResponse> PackingListDoesntExistException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponse> handlePackingListDoesntExistException(PackingListDoesntExistException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(WeatherNotFoundException.class)
-    public ResponseEntity<ErrorResponse> WeatherNotFoundException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponse> handleWeatherNotFoundException(WeatherNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EmptyPackingListIdException.class)
-    public ResponseEntity<ErrorResponse> EmptyPackingListIdException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleEmptyPackingListIdException(EmptyPackingListIdException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmptyPackingListItemException.class)
-    public ResponseEntity<ErrorResponse> EmptyPackingListItemException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleEmptyPackingListItemException(EmptyPackingListItemException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmptyPackingListNameException.class)
-    public ResponseEntity<ErrorResponse> EmptyPackingListNameException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleEmptyPackingListNameException(EmptyPackingListNameException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidTemperatureException.class)
-    public ResponseEntity<ErrorResponse> InvalidTemperatureException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleInvalidTemperatureException(InvalidTemperatureException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidTravelDaysException.class)
-    public ResponseEntity<ErrorResponse> InvalidTravelDaysException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleInvalidTravelDaysException(InvalidTravelDaysException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(PackingItemAlreadyExistException.class)
-    public ResponseEntity<ErrorResponse> PackingItemAlreadyExistException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorResponse> handlePackingItemAlreadyExistException(PackingItemAlreadyExistException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(PackingItemNotFoundException.class)
-    public ResponseEntity<ErrorResponse> PackingItemNotFoundException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponse> handlePackingItemNotFoundException(PackingItemNotFoundException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.NOT_FOUND);
     }
-    
+
     @ExceptionHandler(InvalidUUIDException.class)
-    public ResponseEntity<ErrorResponse> InvalidUUIDException(Exception exception, WebRequest webRequest) {
-
-        ErrorResponse errorDto = new ErrorResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ErrorResponse> handleInvalidUUIDException(InvalidUUIDException ex, WebRequest request) {
+        return buildErrorResponse(ex, request, HttpStatus.BAD_REQUEST);
     }
-    
+
+    private ResponseEntity<ErrorResponse> buildErrorResponse(Exception ex, WebRequest request, HttpStatus status) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                new Date(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(errorResponse, status);
+    }
 
 }

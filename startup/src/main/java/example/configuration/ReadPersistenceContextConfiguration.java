@@ -26,7 +26,7 @@ public class ReadPersistenceContextConfiguration {
             EntityManagerFactoryBuilder builder, DataSource dataSource, JpaProperties jpaProperties) {
         var em = builder
                 .dataSource(dataSource)
-                .packages("ectimel")
+                .packages("ectimel.models.read")
                 .persistenceUnit("puRead")
                 .properties(jpaProperties.getProperties())
                 .build();

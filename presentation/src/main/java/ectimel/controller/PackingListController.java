@@ -3,10 +3,10 @@ package ectimel.controller;
 import ectimel.exceptions.InvalidUUIDException;
 import example.commands.*;
 import example.dto.PackingListDto;
-import example.queries.GetPackingList;
+import ectimel.queries.GetPackingList;
 import example.queries.Query;
 import example.queries.QueryDispatcher;
-import example.queries.SearchPackingList;
+import ectimel.queries.SearchPackingList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
