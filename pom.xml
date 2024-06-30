@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     
     <groupId>ectimel</groupId>
-    <artifactId>ModdMonn</artifactId>
+    <artifactId>CleanCQRS</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     
     <name>ModdMonn</name>
