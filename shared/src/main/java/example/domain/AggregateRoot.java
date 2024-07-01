@@ -17,11 +17,9 @@ public class AggregateRoot<T> {
 
     protected void addEvent(DomainEvent event) {
         if (events.isEmpty() && !versionIncremented) {
-            version++;
-            versionIncremented = true;
-            
-            events.add(event);
+            incrementVersion();
         }
+        events.add(event);
     }
 
     public void clearEvents() {

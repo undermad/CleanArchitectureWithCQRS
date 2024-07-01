@@ -19,8 +19,6 @@ public class WeatherDummyService implements WeatherService {
 
     @Override
     public CompletableFuture<WeatherDto> GetWeatherAsync(Localization localization) {
-        return CompletableFuture.supplyAsync(() -> {
-            return new WeatherDto(random.nextDouble(-10, 35));
-        });
+        return CompletableFuture.supplyAsync(() -> new WeatherDto(random.nextDouble(-10, 35)));
     }
 }

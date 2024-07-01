@@ -18,18 +18,13 @@ public class PolicyBeanDefinitionRegistrar implements ImportBeanDefinitionRegist
 
         ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
         scanner.addIncludeFilter(new AnnotationTypeFilter(Policy.class));
-        
+
         String basePackage = "example.policies";
-        
-        for(BeanDefinition beanDefinition : scanner.findCandidateComponents(basePackage)) {
-            try {
-                Class<?> clazz = Class.forName(beanDefinition.getBeanClassName());
-                registry.registerBeanDefinition(Objects.requireNonNull(beanDefinition.getBeanClassName()), beanDefinition);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException("Failed to register bean for class: " + beanDefinition.getBeanClassName(), e);
-            }
+
+        for (BeanDefinition beanDefinition : scanner.findCandidateComponents(basePackage)) {
+            registry.registerBeanDefinition(Objects.requireNonNull(beanDefinition.getBeanClassName()), beanDefinition);
         }
-        
+
         ImportBeanDefinitionRegistrar.super.registerBeanDefinitions(importingClassMetadata, registry, importBeanNameGenerator);
     }
 }
